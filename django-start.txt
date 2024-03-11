@@ -1,0 +1,134 @@
+cd directory (переместиться в нужную папку)
+mkdir project-name (или просто создайте папку с названием проекта)
+code . (с пайчармом через сам пайчарм папку открыть)
+
+(запустить powershell от имени администратора)
+Set-ExecutionPolicy unrestricted                          /-- команда ламающая win для вертуальной среды venv
+
+python -m venv venv                                       /-- создает папку venv с вертуальной средой
+venv/Scripts/activate                                     /-- активирует виртуальную среду
+
+pip install django
+
+pip install python-dotenv
+
+django-admin startproject app .
+или
+python -m django startproject app .
+
+зайти в settings.py
+
+import os                                              /импортируем в settings.py
+
+from dotenv import load_dotenv
+
+load_dotenv()
+
+поменять
+SECRET_KEY = os.getenv('SECRET')
+
+
+
+Создать файл .env
+В терминале
+from django.core.management.utils import get_random_secret_key
+print(get_random_secret_key())
+
+Выдаст что-то наподобии 6a0kj6z06h2(m$*)111_-(tq2_c+^+^k$&=8w8*s4r9*8j6v+h
+В файл .env соответсвенно записать(можно прямо также, без генерации выше)
+SECRET="6a0kj6z06h2(m$*)111_-(tq2_c+^+^k$&=8w8*s4r9*8j6v+h"
+
+SECRET_KEY = os.getenv('SECRET')                        /--импортируем в settings.py
+
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+
+STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'static'
+
+
+--
+
+python manage.py runserver
+
+
+python manage.py startapp api
+python manage.py startapp name
+Add to the INSTALLED_APPS
+
+python manage.py makemigrations app_name
+python manage.py migrate
+
+python manage.py createsuperuser --username admin --email admin@domain.com
+
+-----------------------------------------------------------------------------------------------------------------------------
+                                файл Александра
+Создайте репозиторий на github(можно при создании снизу выбрать .gitignore для python)
+Клонируйте локально
+
+(запустить powershell от имени администратора)
+Set-ExecutionPolicy unrestricted
+
+cd directory (переместиться в нужную папку)
+code . (или просто откройте папку проекта вашим редактором кода)
+
+python -m venv venv
+venv/Scripts/activate
+
+pip install django
+pip install python-dotenv
+
+django-admin startproject app .
+или
+python -m django startproject app .
+
+зайти в settings.py
+
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+поменять
+SECRET_KEY = os.getenv('SECRET')
+
+
+
+Создать файл .env
+В терминале
+python
+from django.core.management.utils import get_random_secret_key
+print(get_random_secret_key())
+
+Выдаст что-то наподобии 6a0kj6z06h2(m$*)111_-(tq2_c+^+^k$&=8w8*s4r9*8j6v+h
+В файл .env соответсвенно записать(можно прямо также, без генерации выше)
+SECRET="6a0kj6z06h2(m$*)111_-(tq2_c+^+^k$&=8w8*s4r9*8j6v+h"
+
+Вернуться в settings.py
+поменять
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+
+
+Заменить и добавить
+STATIC_URL = '/static'
+STATIC_ROOT = BASE_DIR / 'static'
+
+заменить
+LANGUAGE_CODE = 'ru-ru'
+
+Команды
+------
+
+pip freeze > requirements.txt  /-- создает файл со всеми библиотеками
+
+pip install -r ./requirements.txt  /--загружает все библиотеки из файла
+
+python manage.py runserver - запустить сервер
+
+python manage.py startapp name - создать подприложение name
+Нужно будет добавить приложение в INSTALLED_APPS
+
+python manage.py makemigrations app_name - если вы изменили модели, этой командой создается миграция - обновление базы данных
+python manage.py migrate - обновление/создание базы данных
+
+python manage.py createsuperuser --username admin --email admin@domain.com
+- добавить админ пользователя
