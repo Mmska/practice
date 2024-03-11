@@ -6,7 +6,7 @@ code . (с пайчармом через сам пайчарм папку отк
 Set-ExecutionPolicy unrestricted                          /-- команда ламающая win для вертуальной среды venv
 
 python -m venv venv                                       /-- создает папку venv с вертуальной средой
-venv/Scripts/activate                                     /-- активирует виртуальную среду
+venv/Scripts/activate    1 _) если нет папки прописываем.НА НОВОМ ПК.                                /-- активирует виртуальную среду
 
 pip install django
 
@@ -29,7 +29,7 @@ SECRET_KEY = os.getenv('SECRET')
 
 
 
-Создать файл .env
+Создать файл .env    	2_)	ЕСЛИ не было созданной папки VENV
 В терминале
 from django.core.management.utils import get_random_secret_key
 print(get_random_secret_key())
@@ -38,7 +38,7 @@ print(get_random_secret_key())
 В файл .env соответсвенно записать(можно прямо также, без генерации выше)
 SECRET="6a0kj6z06h2(m$*)111_-(tq2_c+^+^k$&=8w8*s4r9*8j6v+h"
 
-SECRET_KEY = os.getenv('SECRET')                        /--импортируем в settings.py
+SECRET_KEY = os.getenv('SECRET')     3_)     ЕСЛИ не было созданной папки VENV              /--импортируем в settings.py
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
@@ -48,7 +48,7 @@ STATIC_ROOT = BASE_DIR / 'static'
 
 --
 
-python manage.py runserver
+python manage.py runserver     ****************************что бы запустить и посмотреть что получилось 
 
 
 python manage.py startapp api
@@ -120,7 +120,7 @@ LANGUAGE_CODE = 'ru-ru'
 
 pip freeze > requirements.txt  /-- создает файл со всеми библиотеками
 
-pip install -r ./requirements.txt  /--загружает все библиотеки из файла
+pip install -r requirements.txt  4_) ЕСЛИ не было созданной папки VENV /--загружает все библиотеки из файла
 
 python manage.py runserver - запустить сервер
 
@@ -128,7 +128,7 @@ python manage.py startapp name - создать подприложение name
 Нужно будет добавить приложение в INSTALLED_APPS
 
 python manage.py makemigrations app_name - если вы изменили модели, этой командой создается миграция - обновление базы данных
-python manage.py migrate - обновление/создание базы данных
+python manage.py migrate 	ЕСЛИ не было созданной папки VENV 	  - обновление/создание базы данных
 
 python manage.py createsuperuser --username admin --email admin@domain.com
 - добавить админ пользователя
