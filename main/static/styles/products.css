@@ -20,3 +20,22 @@
     border-radius: 5px;
     margin: 0 auto;
 }
+
+.product-card__prices-container {
+    height: 2em;
+}
+
+.product-card_disabled {
+    opacity: 0.5;
+}
+
+.product-card__image {
+    display: block;
+    object-fit: contain;
+    width: 140px;
+    height: 140px;
+}
+
+.product-card__original-price {
+    text-decoration: line-through;
+}
