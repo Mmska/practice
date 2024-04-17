@@ -2,6 +2,27 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
+class Category(models.Model):
+    title = models.CharField(
+        max_length=255, blank=False, verbose_name='Название',
+    )
+    parent = models.ForeignKey(
+        'self', on_delete=models.CASCADE, null=True, blank=True,
+        verbose_name='Родительская категория'
+    )
+
+    @property
+    def products(self):
+        return Product.objects.filter(category=self)
+
+    class Meta:
+        verbose_name = 'Категория'
+        verbose_name_plural = 'Категории'
+
+    def __str__(self):
+        return self.title
+
+
 class Product(models.Model):
     title = models.CharField(
         max_length=255, blank=False, verbose_name='Название'
@@ -27,6 +48,7 @@ class Product(models.Model):
     updated_at = models.DateTimeField(
         auto_now=True, verbose_name='Дата обновления'
     )
+    categories = models.ManyToManyField(Category)
 
     class Meta:
         verbose_name = 'Товар'
@@ -74,12 +96,24 @@ class Order(models.Model):
         max_length=15, choices=Status.choices, default=Status.CREATED
     )
 
+    @property
+    def status_label(self):
+        return dict(Order.Status.choices)[self.status]
+
     created_at = models.DateTimeField(
         auto_now_add=True, verbose_name='Дата создания'
     )
     updated_at = models.DateTimeField(
         auto_now=True, verbose_name='Дата обновления'
     )
+
+    @property
+    def is_cancelable(self):
+        return self.status not in (
+            self.Status.CANCELED,
+            self.Status.DELIVERED,
+            self.Status.DELIVERING
+        )
 
     @property
     def total_price(self):
@@ -93,4 +127,4 @@ class Order(models.Model):
         verbose_name_plural = 'Заказы'
 
     def __str__(self):
-        return f'Order on {str(self.product)}'
+        return f'Order from {str(self.user)}'

@@ -45,7 +45,7 @@ body {
 }
 
 .main-content {
-    padding: 3em;
+    padding: 1em 3em;
 }
 
 button {
@@ -56,4 +56,9 @@ button {
     .main-content {
         padding: 3em 1em;
     }
+}
+
+.logo{
+    width: 100px;
+    height: auto;
 }
